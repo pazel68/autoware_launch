@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="sensor_kit_macro" params="parent x y z roll pitch yaw">
+    <!--xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+    <xacro:include filename="$(find vls_description)/urdf/VLS-128.urdf.xacro"/>
+    <xacro:include filename="$(find camera_description)/urdf/monocular_camera.xacro"/>
+    <xacro:include filename="$(find imu_description)/urdf/imu.xacro"/-->
+    
+    <!--link name="zed_base_link" /-->
+    <!-- <link name="base_link" />  -->
+    <link name="rs16" />
+    <link name="gnss" />
+    <link name="camera0" />
+
+    <xacro:arg name="gpu" default="false"/>
+    <xacro:arg name="config_dir" default="$(find pazel_sensor_kit_description)/config"/>
+
+    <xacro:property name="sensor_kit_base_link" default="sensor_kit_base_link"/>
+
+    <joint name="${sensor_kit_base_link}_joint" type="fixed">
+      <origin rpy="${roll} ${pitch} ${yaw}" xyz="${x} ${y} ${z}"/>
+      <parent link="${parent}"/>
+      <child link="${sensor_kit_base_link}"/>
+    </joint>
+    <link name="${sensor_kit_base_link}">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </link>
+
+    <!-- sensor -->
+    <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/sensor_kit_calibration.yaml')}"/>
+
+    <!-- lidar -->
+    <joint name="sensor_kit_baselink_rs16" type="fixed">
+    <parent link="sensor_kit_base_link" />
+    <child link="rs16" />
+    <origin
+        xyz="${calibration['sensor_kit_base_link']['rs16']['x']}
+             ${calibration['sensor_kit_base_link']['rs16']['y']}
+             ${calibration['sensor_kit_base_link']['rs16']['z']}"
+        rpy="${calibration['sensor_kit_base_link']['rs16']['roll']}
+             ${calibration['sensor_kit_base_link']['rs16']['pitch']}
+             ${calibration['sensor_kit_base_link']['rs16']['yaw']}"
+      />
+  </joint>
+    
+    <!-- camera >
+    <xacro:monocular_camera_macro
+      name="traffic_light_right_camera/camera"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['traffic_light_right_camera/camera_link']['x']}"
+      y="${calibration['sensor_kit_base_link']['traffic_light_right_camera/camera_link']['y']}"
+      z="${calibration['sensor_kit_base_link']['traffic_light_right_camera/camera_link']['z']}"
+      roll="${calibration['sensor_kit_base_link']['traffic_light_right_camera/camera_link']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['traffic_light_right_camera/camera_link']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['traffic_light_right_camera/camera_link']['yaw']}"
+      fps="30"
+      width="800"
+      height="400"
+      fov="1.3"
+    />
+    <xacro:monocular_camera_macro
+      name="traffic_light_left_camera/camera"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['traffic_light_left_camera/camera_link']['x']}"
+      y="${calibration['sensor_kit_base_link']['traffic_light_left_camera/camera_link']['y']}"
+      z="${calibration['sensor_kit_base_link']['traffic_light_left_camera/camera_link']['z']}"
+      roll="${calibration['sensor_kit_base_link']['traffic_light_left_camera/camera_link']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['traffic_light_left_camera/camera_link']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['traffic_light_left_camera/camera_link']['yaw']}"
+      fps="30"
+      width="800"
+      height="400"
+      fov="1.3"
+    /-->
+  
+    <joint name="rs16_camera" type="fixed">
+    <parent link="rs16" />
+    <child link="camera0" />
+      <origin
+        xyz="${calibration['rs16']['camera0']['x']}
+             ${calibration['rs16']['camera0']['y']}
+             ${calibration['rs16']['camera0']['z']}"
+        rpy="${calibration['rs16']['camera0']['roll']}
+             ${calibration['rs16']['camera0']['pitch']}
+             ${calibration['rs16']['camera0']['yaw']}"
+      />
+    </joint>
+
+    <!-- gnss -->
+    <joint name="sensor_kit_baselink_gnss" type="fixed">
+    <parent link="sensor_kit_base_link" />
+    <child link="gnss" />
+      <origin
+        xyz="${calibration['sensor_kit_base_link']['gnss']['x']}
+             ${calibration['sensor_kit_base_link']['gnss']['y']}
+             ${calibration['sensor_kit_base_link']['gnss']['z']}"
+        rpy="${calibration['sensor_kit_base_link']['gnss']['roll']}
+             ${calibration['sensor_kit_base_link']['gnss']['pitch']}
+             ${calibration['sensor_kit_base_link']['gnss']['yaw']}"
+      />
+    </joint>
+      
+    <!-- imu >
+    <xacro:imu_macro
+      name="tamagawa/imu"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['x']}"
+      y="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['y']}"
+      z="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['z']}"
+      roll="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['tamagawa/imu_link']['yaw']}"
+      fps="100"
+    /-->
+  </xacro:macro>
+</robot>
