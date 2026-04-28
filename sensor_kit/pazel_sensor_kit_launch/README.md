@@ -1,1 +1,1 @@
-# sample_sensor_kit_launch
+# pazel_sensor_kit_launch
