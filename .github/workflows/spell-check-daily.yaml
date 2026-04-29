@@ -15,7 +15,6 @@ concurrency:
 
 jobs:
   spell-check-daily:
-    if: false
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
