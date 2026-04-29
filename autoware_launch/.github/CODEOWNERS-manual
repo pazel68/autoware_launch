@@ -1,22 +1,3 @@
-### Automatically generated from package.xml ###
-autoware_launch/** mfc@leodrive.ai ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-sensor_kit/awsim_labs_sensor_kit_launch/awsim_labs_sensor_kit_description/** piotr.jaroszek@robotec.ai
-sensor_kit/awsim_labs_sensor_kit_launch/awsim_labs_sensor_kit_launch/** piotr.jaroszek@robotec.ai
-sensor_kit/awsim_labs_sensor_kit_launch/common_awsim_labs_sensor_launch/** piotr.jaroszek@robotec.ai
-sensor_kit/awsim_sensor_kit_launch/awsim_sensor_kit_description/** piotr.jaroszek@robotec.ai
-sensor_kit/awsim_sensor_kit_launch/awsim_sensor_kit_launch/** piotr.jaroszek@robotec.ai
-sensor_kit/sample_sensor_kit_launch/common_sensor_launch/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-sensor_kit/sample_sensor_kit_launch/sample_sensor_kit_description/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-sensor_kit/sample_sensor_kit_launch/sample_sensor_kit_launch/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-sensor_kit/single_lidar_sensor_kit_launch/single_lidar_common_launch/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-sensor_kit/single_lidar_sensor_kit_launch/single_lidar_sensor_kit_description/** beginning.fan@autocore.ai
-sensor_kit/single_lidar_sensor_kit_launch/single_lidar_sensor_kit_launch/** beginning.fan@autocore.ai
-vehicle/awsim_labs_vehicle_launch/awsim_labs_vehicle_description/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-vehicle/awsim_labs_vehicle_launch/awsim_labs_vehicle_launch/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-vehicle/sample_vehicle_launch/sample_vehicle_description/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-vehicle/sample_vehicle_launch/sample_vehicle_launch/** ryohsuke.mitsudome@tier4.jp yukihiro.saito@tier4.jp
-
-### Copied from .github/CODEOWNERS-manual ###
 # /**
 # .github/**
 autoware_launch/** yukihiro.saito@tier4.jp ryohsuke.mitsudome@tier4.jp mfc@leodrive.ai
